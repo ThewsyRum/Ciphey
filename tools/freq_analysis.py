@@ -1,10 +1,11 @@
 import json
 import sys
-
 import cipheycore
 
-data = sys.stdin.read()
+data = ""
+for line in sys.stdin:
+    data += line
 
 analysis = cipheycore.analyse_string(data)
-
-print(json.dumps({i: j / len(data) for i, j in analysis.freqs.items()}))
+freqs = {i: j / len(data) for i, j in analysis.freqs.items()}
+print(json.dumps(freqs))
